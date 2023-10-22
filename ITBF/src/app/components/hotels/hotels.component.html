@@ -1,0 +1,73 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <div class="card p-4">
+                <div class="d-flex justify-content-between">
+                    <h3>Lista de Hoteles</h3>
+                    <button type="button" style="font-weight: 500;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Hotel&nbsp;<i class="bi bi-building-add"></i></button>
+                </div>
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Hotel</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hotel of Hotels; let iControl=index">
+                                <th scope="row">{{ hotel.id }}</th>
+                                <td>{{ hotel.nombre }}</td>
+                                <td>
+                                    <a routerLink="/ver-hotel/{{hotel.id}}"><i style="padding: 2px;border-radius: 2px; color:#299100; background-color: #e0e0e0;" class="bi bi-clipboard-data"></i></a>
+                                    |
+                                    <a routerLink="/editar-hotel/{{hotel.id}}"><i style="padding: 2px;border-radius: 2px; color:#0059ff; background-color: #e0e0e0;" class="bi bi-pencil-square"></i></a>
+                                    |
+                                    <a (click)="deleteData(hotel.id,iControl)" role="button"><i style="padding: 2px;border-radius: 2px; color:rgb(255, 0, 0);background-color: #e0e0e0;" class="bi bi-trash3-fill"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formHotels" (ngSubmit)="sendData()">
+                      <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" formControlName="nombre">
+                        <label for="floatingInput">Nombre</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="direccion">
+                        <label for="floatingInput">Dirección</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="ciudad">
+                        <label for="floatingInput">Ciudad</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="nit">
+                        <label for="floatingInput">NIT</label>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
